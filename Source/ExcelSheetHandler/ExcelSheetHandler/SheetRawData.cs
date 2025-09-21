@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExcelSheetHandler
 {
@@ -12,6 +14,7 @@ namespace ExcelSheetHandler
         /// Value : 변수 값
         /// </summary>
         private Dictionary<string, string> _stringData = new Dictionary<string, string>();
+        [JsonIgnore]
         public IEnumerable<KeyValuePair<string, string>> StringData => _stringData;
 
         /// <summary>
@@ -19,6 +22,7 @@ namespace ExcelSheetHandler
         /// Value : 변수 값
         /// </summary>
         private Dictionary<string, int> _intData = new Dictionary<string, int>();
+        [JsonIgnore]
         public IEnumerable<KeyValuePair<string, int>> IntData => _intData;
 
         /// <summary>
@@ -26,6 +30,7 @@ namespace ExcelSheetHandler
         /// Value : 변수 값
         /// </summary>
         private Dictionary<string, float> _floatData = new Dictionary<string, float>();
+        [JsonIgnore]
         public IEnumerable<KeyValuePair<string, float>> FloatData => _floatData;
         
         /// <summary>
@@ -33,7 +38,9 @@ namespace ExcelSheetHandler
         /// Value : 변수 값
         /// </summary>
         private Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
+        [JsonIgnore]
         public IEnumerable<KeyValuePair<string, bool>> BoolData => _boolData;
+
 
         /// <summary>
         /// Key : 타입 이름
@@ -116,6 +123,6 @@ namespace ExcelSheetHandler
             if(_boolData.TryGetValue(name, out bool value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
-        }            
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace ExcelSheetHandler
             return result;
         }
 
-        public List<SheetRawData> ParseSheet(Excel.Worksheet activeSheet)
+        public List<SheetRawData> ParseRows(Excel.Worksheet activeSheet)
         {
             SheetHeaderData headerData = ParseHeader(activeSheet);
             List<SheetRawData> result = new List<SheetRawData>();

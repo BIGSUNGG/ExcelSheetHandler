@@ -18,7 +18,13 @@ namespace ExcelSheetHandler
         private void ToJsonBtn_Click(object sender, RibbonControlEventArgs e)
         {
             Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
-            var result = SheetHandler.Instance.ParseSheet(activeSheet);
+            List<SheetRawData> rowDatas = SheetHandler.Instance.ParseRows(activeSheet);
+
+            List<string> rowJsons = new List<string>(rowDatas.Count);
+            foreach (var rowData in rowDatas)
+            {
+                rowJsons.Add(SheetRawDataJsonConvert.SerializeData(rowData));
+            }
         }
     }
 }

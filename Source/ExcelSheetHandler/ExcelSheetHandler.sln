@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35825.156 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelSheetHandler", "ExcelSheetHandler\ExcelSheetHandler.csproj", "{B4BC232A-A2C1-4D11-91E9-6B090C644ADD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Test", "Unit Test\Unit Test.csproj", "{A895C108-E4C8-421B-BC29-93A7CE519713}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B4BC232A-A2C1-4D11-91E9-6B090C644ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4BC232A-A2C1-4D11-91E9-6B090C644ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4BC232A-A2C1-4D11-91E9-6B090C644ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A895C108-E4C8-421B-BC29-93A7CE519713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A895C108-E4C8-421B-BC29-93A7CE519713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A895C108-E4C8-421B-BC29-93A7CE519713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A895C108-E4C8-421B-BC29-93A7CE519713}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
