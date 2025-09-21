@@ -36,6 +36,7 @@
         {
             this.Handler = this.Factory.CreateRibbonTab();
             this.ReadGroup = this.Factory.CreateRibbonGroup();
+            this.GenerateClassCodeBtn = this.Factory.CreateRibbonButton();
             this.ToJsonBtn = this.Factory.CreateRibbonButton();
             this.Handler.SuspendLayout();
             this.ReadGroup.SuspendLayout();
@@ -50,9 +51,16 @@
             // 
             // ReadGroup
             // 
+            this.ReadGroup.Items.Add(this.GenerateClassCodeBtn);
             this.ReadGroup.Items.Add(this.ToJsonBtn);
             this.ReadGroup.Label = "Read";
             this.ReadGroup.Name = "ReadGroup";
+            // 
+            // GenerateClassCodeBtn
+            // 
+            this.GenerateClassCodeBtn.Label = "GenerateClassCode";
+            this.GenerateClassCodeBtn.Name = "GenerateClassCodeBtn";
+            this.GenerateClassCodeBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GenerateClassCodeBtn_Click);
             // 
             // ToJsonBtn
             // 
@@ -79,6 +87,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab Handler;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup ReadGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ToJsonBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateClassCodeBtn;
     }
 
     partial class ThisRibbonCollection

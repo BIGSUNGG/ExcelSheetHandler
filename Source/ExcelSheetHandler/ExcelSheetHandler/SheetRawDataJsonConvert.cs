@@ -135,5 +135,50 @@ namespace ExcelSheetHandler
             
             return JsonConvert.DeserializeObject<SheetRawData>(json, settings);
         }
+
+        /// <summary>
+        /// List<SheetRawData>를 JSON 문자열로 직렬화합니다.
+        /// 각 SheetRawData는 개별 JSON 문자열로 직렬화되어 배열에 포함됩니다.
+        /// </summary>
+        /// <param name="sheetRawDatas">직렬화할 SheetRawData 리스트</param>
+        /// <returns>JSON 문자열</returns>
+        public static string SerializeDatas(List<SheetRawData> sheetRawDatas)
+        {
+            List<string> rowJsons = new List<string>(sheetRawDatas.Count);
+            foreach (var rowData in sheetRawDatas)
+            {
+                rowJsons.Add(SerializeData(rowData));
+            }
+            
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            };
+            
+            return JsonConvert.SerializeObject(rowJsons, settings);
+        }
+
+        /// <summary>
+        /// JSON 문자열을 List<SheetRawData>로 역직렬화합니다.
+        /// </summary>
+        /// <param name="json">JSON 문자열</param>
+        /// <returns>SheetRawData 리스트</returns>
+        public static List<SheetRawData> DeserializeDatas(string json)
+        {
+            List<string> rowJsons = JsonConvert.DeserializeObject<List<string>>(json);
+            List<SheetRawData> rowDatas = new List<SheetRawData>(rowJsons.Count);
+
+            var converter = new SheetRawDataJsonConvert(new SheetRawData());
+            var settings = new JsonSerializerSettings
+            {
+                Converters = { converter }
+            };
+
+            foreach (var rowJson in rowJsons)
+            {
+                rowDatas.Add(JsonConvert.DeserializeObject<SheetRawData>(rowJson, settings));
+            }
+            return rowDatas;
+        }
     }
 }
