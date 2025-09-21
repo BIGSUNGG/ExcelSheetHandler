@@ -58,6 +58,7 @@
             // 
             this.ToJsonBtn.Label = "ToJson";
             this.ToJsonBtn.Name = "ToJsonBtn";
+            this.ToJsonBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ToJsonBtn_Click);
             // 
             // HandlerRibbon
             // 
