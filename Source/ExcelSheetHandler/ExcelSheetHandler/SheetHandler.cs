@@ -30,10 +30,10 @@ namespace ExcelSheetHandler
             return result;
         }
 
-        public List<SheetRawData> ParseRows(Excel.Worksheet activeSheet)
+        public List<SheetRowData> ParseRows(Excel.Worksheet activeSheet)
         {
             SheetHeaderData headerData = ParseHeader(activeSheet);
-            List<SheetRawData> result = new List<SheetRawData>();
+            List<SheetRowData> result = new List<SheetRowData>();
 
             Excel.Range usedRange = activeSheet.UsedRange;
 
@@ -43,7 +43,7 @@ namespace ExcelSheetHandler
             // 각 셀의 데이터 출력
             for (int row = 3; row <= rowCount; row++)
             {
-                SheetRawData rawData = new SheetRawData();
+                SheetRowData rawData = new SheetRowData();
 
                 for (int col = 1; col <= colCount; col++)
                 {

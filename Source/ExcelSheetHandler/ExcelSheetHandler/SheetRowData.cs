@@ -2,17 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ExcelSheetHandler
 {
-    public class SheetRawData
+    public class SheetRowData
     {
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
+        [JsonProperty("StringData")]
+        [JsonRequired]
         private Dictionary<string, string> _stringData = new Dictionary<string, string>();
         [JsonIgnore]
         public IEnumerable<KeyValuePair<string, string>> StringData => _stringData;
@@ -21,6 +24,8 @@ namespace ExcelSheetHandler
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
+        [JsonProperty("IntData")]
+        [JsonRequired]
         private Dictionary<string, int> _intData = new Dictionary<string, int>();
         [JsonIgnore]
         public IEnumerable<KeyValuePair<string, int>> IntData => _intData;
@@ -29,6 +34,8 @@ namespace ExcelSheetHandler
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
+        [JsonProperty("FloatData")]
+        [JsonRequired]
         private Dictionary<string, float> _floatData = new Dictionary<string, float>();
         [JsonIgnore]
         public IEnumerable<KeyValuePair<string, float>> FloatData => _floatData;
@@ -37,6 +44,8 @@ namespace ExcelSheetHandler
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
+        [JsonProperty("BoolData")]
+        [JsonRequired]
         private Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
         [JsonIgnore]
         public IEnumerable<KeyValuePair<string, bool>> BoolData => _boolData;
@@ -46,9 +55,10 @@ namespace ExcelSheetHandler
         /// Key : 타입 이름
         /// Value : SetData 함수 액션(변수 이름, 변수 값)
         /// </summary>
+        [JsonIgnore]
         private Dictionary<string, Action<string, dynamic>> _setActions = new Dictionary<string, Action<string, dynamic>>();
 
-        public SheetRawData()
+        public SheetRowData()
         {
             _setActions.Add("string", (string name, dynamic value)=>SetStringData(name, value));
             _setActions.Add("int", (string name, dynamic value)=>SetIntData(name, (int)value));

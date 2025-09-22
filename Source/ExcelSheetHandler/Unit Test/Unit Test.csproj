@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="InjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

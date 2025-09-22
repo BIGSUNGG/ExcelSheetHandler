@@ -239,8 +239,8 @@
     <Compile Include="SheetHandler.cs" />
     <Compile Include="SheetHeaderCell.cs" />
     <Compile Include="SheetHeaderData.cs" />
-    <Compile Include="SheetRawData.cs" />
-    <Compile Include="SheetRawDataInjector.cs" />
+    <Compile Include="SheetRowData.cs" />
+    <Compile Include="SheetRowDataInjector.cs" />
     <Compile Include="TextDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>

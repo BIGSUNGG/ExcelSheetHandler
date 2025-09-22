@@ -16,7 +16,7 @@ namespace Unit_Test
         [TestMethod]
         public void InjectToExampleClassTest()
         {
-            var raw = new SheetRawData();
+            var raw = new SheetRowData();
             raw.SetIntData("Id", 123);
             raw.SetFloatData("Price", 45.67f);
             raw.SetStringData("Name", "Sample");
@@ -24,7 +24,7 @@ namespace Unit_Test
 
             var target = new ExampleClass();
 
-            SheetRawDataInjector.Instance.Inject(raw, target);
+            SheetRowDataInjector.Instance.Inject(raw, target);
 
             Assert.AreEqual(123, target.Id);
             Assert.AreEqual(45.67f, target.Price);

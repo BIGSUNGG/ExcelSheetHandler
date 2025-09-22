@@ -11,9 +11,9 @@ namespace ExcelSheetHandler
     /// <summary>
     /// SheetRawData의 데이터를 다른 클래스에 주입하는 클래스
     /// </summary>
-    public class SheetRawDataInjector
+    public class SheetRowDataInjector
     {
-        public static SheetRawDataInjector Instance { get; private set; } = new SheetRawDataInjector();
+        public static SheetRowDataInjector Instance { get; private set; } = new SheetRowDataInjector();
 
         /// <summary>
         /// First Key : 클래스 타입
@@ -25,15 +25,15 @@ namespace ExcelSheetHandler
         /// <summary>
         /// RawData의 값을 target 오브젝트에게 주입
         /// </summary>
-        /// <param name="rawData"></param>
+        /// <param name="rowData"></param>
         /// <param name="target"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Inject(SheetRawData rawData, object target)
+        public void Inject(SheetRowData rowData, object target)
         {
             if (_dataFields.TryGetValue(target.GetType(), out var fields) == false)
                 RegisterType(target.GetType(), out fields);
 
-            foreach(var data in rawData.StringData)
+            foreach(var data in rowData.StringData)
             {
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
@@ -41,7 +41,7 @@ namespace ExcelSheetHandler
                 field.SetValue(target, data.Value);
             }
 
-            foreach(var data in rawData.IntData)
+            foreach(var data in rowData.IntData)
             {
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
@@ -49,7 +49,7 @@ namespace ExcelSheetHandler
                 field.SetValue(target, data.Value);
             }
 
-            foreach(var data in rawData.FloatData)
+            foreach(var data in rowData.FloatData)
             {
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
@@ -57,7 +57,7 @@ namespace ExcelSheetHandler
                 field.SetValue(target, data.Value);
             }
 
-            foreach(var data in rawData.BoolData)
+            foreach(var data in rowData.BoolData)
             {
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");

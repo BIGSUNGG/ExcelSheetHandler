@@ -37,6 +37,7 @@
             this.Handler = this.Factory.CreateRibbonTab();
             this.ReadGroup = this.Factory.CreateRibbonGroup();
             this.GenerateClassCodeBtn = this.Factory.CreateRibbonButton();
+            this.GenerateJsonBtn = this.Factory.CreateRibbonButton();
             this.ToJsonBtn = this.Factory.CreateRibbonButton();
             this.Handler.SuspendLayout();
             this.ReadGroup.SuspendLayout();
@@ -52,6 +53,7 @@
             // ReadGroup
             // 
             this.ReadGroup.Items.Add(this.GenerateClassCodeBtn);
+            this.ReadGroup.Items.Add(this.GenerateJsonBtn);
             this.ReadGroup.Items.Add(this.ToJsonBtn);
             this.ReadGroup.Label = "Read";
             this.ReadGroup.Name = "ReadGroup";
@@ -62,10 +64,11 @@
             this.GenerateClassCodeBtn.Name = "GenerateClassCodeBtn";
             this.GenerateClassCodeBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GenerateClassCodeBtn_Click);
             // 
-            // ToJsonBtn
+            // GenerateJsonBtn
             // 
-            this.ToJsonBtn.Label = "";
-            this.ToJsonBtn.Name = "ToJsonBtn";
+            this.GenerateJsonBtn.Label = "GenerateJson";
+            this.GenerateJsonBtn.Name = "GenerateJsonBtn";
+            this.GenerateJsonBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GenerateJsonBtn_Click);
             // 
             // HandlerRibbon
             // 
@@ -87,6 +90,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup ReadGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ToJsonBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateClassCodeBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateJsonBtn;
     }
 
     partial class ThisRibbonCollection
