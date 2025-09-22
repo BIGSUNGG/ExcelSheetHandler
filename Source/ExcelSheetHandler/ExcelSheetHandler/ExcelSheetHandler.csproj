@@ -240,7 +240,7 @@
     <Compile Include="SheetHeaderCell.cs" />
     <Compile Include="SheetHeaderData.cs" />
     <Compile Include="SheetRawData.cs" />
-    <Compile Include="SheetRawDataJsonConvert.cs" />
+    <Compile Include="SheetRawDataInjector.cs" />
     <Compile Include="TextDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>

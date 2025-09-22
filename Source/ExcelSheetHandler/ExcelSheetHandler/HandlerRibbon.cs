@@ -17,17 +17,6 @@ namespace ExcelSheetHandler
 
         }
 
-        private void ToJsonBtn_Click(object sender, RibbonControlEventArgs e)
-        {
-            Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
-            List<SheetRawData> rowDatas = SheetHandler.Instance.ParseRows(activeSheet);
-
-            // SerializeDatas 메서드 사용
-            string json = SheetRawDataJsonConvert.SerializeDatas(rowDatas);
-
-            ExcelSheetHandler.TextDisplayDialog.Show("JSON 데이터", json);
-        }
-
         private void GenerateClassCodeBtn_Click(object sender, RibbonControlEventArgs e)
         {
             Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
