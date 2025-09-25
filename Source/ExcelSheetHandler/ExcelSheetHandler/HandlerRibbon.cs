@@ -19,18 +19,32 @@ namespace ExcelSheetHandler
 
         private void GenerateClassCodeBtn_Click(object sender, RibbonControlEventArgs e)
         {
-            Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
-            SheetHeaderData headerData = SheetHandler.Instance.ParseHeader(activeSheet);
-            string code = CodeGenerator.Instance.GenerateClassCode(activeSheet.Name, headerData);
-            ExcelSheetHandler.TextDisplayDialog.Show("생성된 클래스 코드", code);
+            try
+            {
+                Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
+                SheetHeaderData headerData = SheetHandler.Instance.ParseHeader(activeSheet);
+                string code = CodeGenerator.Instance.GenerateClassCode(activeSheet.Name, headerData);
+                ExcelSheetHandler.TextDisplayDialog.Show("생성된 클래스 코드", code);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void GenerateJsonBtn_Click(object sender, RibbonControlEventArgs e)
         {
-            Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
-            var rows = SheetHandler.Instance.ParseRows(activeSheet);
-            string json = JsonConvert.SerializeObject(rows, Formatting.Indented);
-            ExcelSheetHandler.TextDisplayDialog.Show("생성된 JSON 파일", json);
+            try
+            {
+                Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
+                var rows = SheetHandler.Instance.ParseRows(activeSheet);
+                string json = JsonConvert.SerializeObject(rows, Formatting.Indented);
+                ExcelSheetHandler.TextDisplayDialog.Show("생성된 JSON 파일", json);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

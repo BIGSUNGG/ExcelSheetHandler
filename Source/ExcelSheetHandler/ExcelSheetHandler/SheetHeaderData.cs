@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -13,8 +14,10 @@ namespace ExcelSheetHandler
 
         /// <summary>
         /// 중복 이름 확인을 위한 추가된 헤더 이름 집합
+        /// Key : 헤더 이름
+        /// Value : 헤더 타입
         /// </summary>
-        private HashSet<string> _nameChache = new HashSet<string>();
+        private Dictionary<string, string> _cellChache = new Dictionary<string, string>();
 
         public void AddHeaderData(string name, string type)
         {
@@ -22,15 +25,19 @@ namespace ExcelSheetHandler
             _headerDatas.Add(newCellData);
 
             // 중복된 이름이 있다면 이름 중복 처리
-            if (_nameChache.Contains(name))
+            if (_cellChache.TryGetValue(name, out var typeName))
             {
+                if (typeName != type)
+                    throw new InvalidDataException($"{name} 변수의 데이터 타입이 {typeName}와 {type}으로 서로 다름, 데이터 테이블 헤더 확인 필요");
+
+                // TODO : 이 부분 최적화 필요
                 _headerDatas.Where(d => d.Name == name)
                     .ToList()
                     .ForEach(d => d.IsDuplicatedName = true);
             }
             else
             {
-                _nameChache.Add(name);
+                _cellChache.Add(name, type);
             }
         }
     }
