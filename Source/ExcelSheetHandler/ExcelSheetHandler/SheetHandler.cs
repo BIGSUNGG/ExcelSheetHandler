@@ -24,7 +24,7 @@ namespace ExcelSheetHandler
                 Excel.Range typeCell = usedRange.Cells[2, column];
                 string name = nameCell.Value2;
                 string type = typeCell.Value2;
-                result.AddHeaderData(name, type);
+                result.AddHeaderCell(name, type);
             }
 
             return result;

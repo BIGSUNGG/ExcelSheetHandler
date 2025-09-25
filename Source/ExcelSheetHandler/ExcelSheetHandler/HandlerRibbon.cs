@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Cysharp.Text;
 using Microsoft.Office.Tools.Ribbon;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -39,7 +40,29 @@ namespace ExcelSheetHandler
                 Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
                 var rows = SheetHandler.Instance.ParseRows(activeSheet);
                 string json = JsonConvert.SerializeObject(rows, Formatting.Indented);
-                ExcelSheetHandler.TextDisplayDialog.Show("생성된 JSON 파일", json);
+                ExcelSheetHandler.TextDisplayDialog.Show("생성된 JSON", json);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void GenerateBinaryBtn_Click(object sender, RibbonControlEventArgs e)
+        {
+            try
+            {
+                Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
+                var rows = SheetHandler.Instance.ParseRows(activeSheet);
+                var bytes = SheetRowDataSerializer.Instance.Serialize(rows);
+                using (var zs = ZString.CreateStringBuilder())
+                {
+                    foreach (var b in bytes)
+                    {
+                        zs.Append(b.ToString());
+                    }
+                    ExcelSheetHandler.TextDisplayDialog.Show("생성된 바이너리 데이터", zs.ToString());
+                }
             }
             catch (System.Exception ex)
             {

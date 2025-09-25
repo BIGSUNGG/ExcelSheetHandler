@@ -7,6 +7,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ExcelSheetHandler
 {
+    /// <summary>
+    /// 시트 하나의 모든 헤더 셀 저장|관리하는 클래스
+    /// </summary>
     public class SheetHeaderData
     {
         private List<SheetHeaderCell> _headerDatas = new List<SheetHeaderCell>();
@@ -19,7 +22,7 @@ namespace ExcelSheetHandler
         /// </summary>
         private Dictionary<string, string> _cellChache = new Dictionary<string, string>();
 
-        public void AddHeaderData(string name, string type)
+        public void AddHeaderCell(string name, string type)
         {
             var newCellData = new SheetHeaderCell(name, type);
             _headerDatas.Add(newCellData);

@@ -5,57 +5,56 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ZeroFormatter;
 
 namespace ExcelSheetHandler
 {
+    /// <summary>
+    /// 시트에서 하나의 행 데이터를 저장하는 클래스
+    /// </summary>
+    [ZeroFormattable]
     public class SheetRowData
     {
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
-        [JsonProperty("StringData")]
-        [JsonRequired]
+        [Index(0)]
         private Dictionary<string, List<string>> _stringData = new Dictionary<string, List<string>>();
-        [JsonIgnore]
+        [IgnoreFormat]
         public IEnumerable<KeyValuePair<string, List<string>>> StringData => _stringData;
 
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
-        [JsonProperty("IntData")]
-        [JsonRequired]
+        [Index(1)]
         private Dictionary<string, List<int>> _intData = new Dictionary<string, List<int>>();
-        [JsonIgnore]
+        [IgnoreFormat]
         public IEnumerable<KeyValuePair<string, List<int>>> IntData => _intData;
 
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
-        [JsonProperty("FloatData")]
-        [JsonRequired]
+        [Index(2)]
         private Dictionary<string, List<float>> _floatData = new Dictionary<string, List<float>>();
-        [JsonIgnore]
+        [IgnoreFormat]
         public IEnumerable<KeyValuePair<string, List<float>>> FloatData => _floatData;
-        
+
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
-        [JsonProperty("BoolData")]
-        [JsonRequired]
+        [Index(3)]
         private Dictionary<string, List<bool>> _boolData = new Dictionary<string, List<bool>>();
-        [JsonIgnore]
+        [IgnoreFormat]
         public IEnumerable<KeyValuePair<string, List<bool>>> BoolData => _boolData;
-
 
         /// <summary>
         /// Key : 타입 이름
         /// Value : SetData 함수 액션(변수 이름, 변수 값)
         /// </summary>
-        [JsonIgnore]
         private Dictionary<string, Action<string, dynamic>> _setActions = new Dictionary<string, Action<string, dynamic>>();
 
         public SheetRowData()
