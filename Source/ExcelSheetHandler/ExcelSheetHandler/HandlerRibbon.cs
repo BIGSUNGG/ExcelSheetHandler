@@ -58,9 +58,8 @@ namespace ExcelSheetHandler
                 using (var zs = ZString.CreateStringBuilder())
                 {
                     foreach (var b in bytes)
-                    {
                         zs.Append(b.ToString());
-                    }
+
                     ExcelSheetHandler.TextDisplayDialog.Show("생성된 바이너리 데이터", zs.ToString());
                 }
             }
