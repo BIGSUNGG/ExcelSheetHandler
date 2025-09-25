@@ -5,15 +5,17 @@ using System.Threading.Tasks;
 
 namespace ExcelSheetHandler
 {
-    public struct SheetHeaderCell
+    public class SheetHeaderCell
     {
-        public string Name {get; private set;}
-        public string Type {get; private set;}
+        public string Name { get; set; }
+        public bool IsDuplicatedName { get; set; }
+        public string Type { get; set; }
 
         public SheetHeaderCell(string name, string type)
         {
             Name = name;
             Type = type;
+            IsDuplicatedName = false;
         }
     }
 }

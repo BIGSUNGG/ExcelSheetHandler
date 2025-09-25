@@ -13,6 +13,8 @@ namespace ExcelSheetHandler
 
         public string GenerateClassCode(string className, SheetHeaderData headerData)
         {
+            HashSet<string> generatedName = new HashSet<string>();
+
             using(var zs = ZString.CreateStringBuilder())
             {
                 zs.AppendLine($@"using System.Collections.Generic;
@@ -21,7 +23,16 @@ public class {className}");
                 zs.AppendLine("{");
                 foreach (var header in headerData.HeaderDatas)
                 {
-                    zs.AppendLine($"\tpublic {header.Type} {header.Name} {{ get; set; }}");
+                    // 이미 만든 코드라면 건너뛰기
+                    if (generatedName.Contains(header.Name))
+                        continue;
+
+                    if(header.IsDuplicatedName)
+                        zs.AppendLine($"\tpublic List<{header.Type}> {header.Name} {{ get; set; }}");
+                    else
+                        zs.AppendLine($"\tpublic {header.Type} {header.Name} {{ get; set; }}");
+
+                    generatedName.Add(header.Name);
                 }
                 zs.AppendLine("}");
 
