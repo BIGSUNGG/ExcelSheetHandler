@@ -21,6 +21,8 @@ namespace Unit_Test
             raw.SetFloatData("Price", 45.67f);
             raw.SetStringData("Name", "Sample");
             raw.SetBoolData("IsActive", true);
+            raw.SetIntData("HasItemId", 1);
+            raw.SetIntData("HasItemId", 2);
 
             var target = new ExampleClass();
 
@@ -30,6 +32,8 @@ namespace Unit_Test
             Assert.AreEqual(45.67f, target.Price);
             Assert.AreEqual("Sample", target.Name);
             Assert.AreEqual(true, target.IsActive);
+            Assert.AreEqual(1, target.HasItemId[0]);
+            Assert.AreEqual(2, target.HasItemId[1]);
         }
     }
 
@@ -42,5 +46,6 @@ namespace Unit_Test
         public float Price { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public List<int> HasItemId { get; set; }
     }
 }

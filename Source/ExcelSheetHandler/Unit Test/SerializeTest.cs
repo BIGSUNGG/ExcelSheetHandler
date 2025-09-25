@@ -2,6 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using ExcelSheetHandler;
+using System.Linq;
 
 namespace Unit_Test
 {
@@ -16,16 +17,20 @@ namespace Unit_Test
             row.SetIntData("Count", 3);
             row.SetFloatData("Rate", 1.5f);
             row.SetBoolData("Active", true);
+            row.SetIntData("HasItemId", 1);
+            row.SetIntData("HasItemId", 2);
 
             var json = JsonConvert.SerializeObject(row);
             var clone = JsonConvert.DeserializeObject<SheetRowData>(json);
 
             Assert.IsNotNull(json);
             Assert.IsNotNull(clone);
-            Assert.AreEqual("Alice", clone.GetStringData("Name"));
-            Assert.AreEqual(3, clone.GetIntData("Count"));
-            Assert.AreEqual(1.5f, clone.GetFloatData("Rate"));
-            Assert.AreEqual(true, clone.GetBoolData("Active"));
+            Assert.AreEqual("Alice", clone.GetStringData("Name")[0]);
+            Assert.AreEqual(3, clone.GetIntData("Count")[0]);
+            Assert.AreEqual(1.5f, clone.GetFloatData("Rate")[0]);
+            Assert.AreEqual(true, clone.GetBoolData("Active")[0]);
+            Assert.AreEqual(1, clone.GetIntData("HasItemId")[0]);
+            Assert.AreEqual(2, clone.GetIntData("HasItemId")[1]);
         }
 
         [TestMethod]

@@ -16,9 +16,9 @@ namespace ExcelSheetHandler
         /// </summary>
         [JsonProperty("StringData")]
         [JsonRequired]
-        private Dictionary<string, string> _stringData = new Dictionary<string, string>();
+        private Dictionary<string, List<string>> _stringData = new Dictionary<string, List<string>>();
         [JsonIgnore]
-        public IEnumerable<KeyValuePair<string, string>> StringData => _stringData;
+        public IEnumerable<KeyValuePair<string, List<string>>> StringData => _stringData;
 
         /// <summary>
         /// Key : 변수 이름
@@ -26,9 +26,9 @@ namespace ExcelSheetHandler
         /// </summary>
         [JsonProperty("IntData")]
         [JsonRequired]
-        private Dictionary<string, int> _intData = new Dictionary<string, int>();
+        private Dictionary<string, List<int>> _intData = new Dictionary<string, List<int>>();
         [JsonIgnore]
-        public IEnumerable<KeyValuePair<string, int>> IntData => _intData;
+        public IEnumerable<KeyValuePair<string, List<int>>> IntData => _intData;
 
         /// <summary>
         /// Key : 변수 이름
@@ -36,9 +36,9 @@ namespace ExcelSheetHandler
         /// </summary>
         [JsonProperty("FloatData")]
         [JsonRequired]
-        private Dictionary<string, float> _floatData = new Dictionary<string, float>();
+        private Dictionary<string, List<float>> _floatData = new Dictionary<string, List<float>>();
         [JsonIgnore]
-        public IEnumerable<KeyValuePair<string, float>> FloatData => _floatData;
+        public IEnumerable<KeyValuePair<string, List<float>>> FloatData => _floatData;
         
         /// <summary>
         /// Key : 변수 이름
@@ -46,9 +46,9 @@ namespace ExcelSheetHandler
         /// </summary>
         [JsonProperty("BoolData")]
         [JsonRequired]
-        private Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
+        private Dictionary<string, List<bool>> _boolData = new Dictionary<string, List<bool>>();
         [JsonIgnore]
-        public IEnumerable<KeyValuePair<string, bool>> BoolData => _boolData;
+        public IEnumerable<KeyValuePair<string, List<bool>>> BoolData => _boolData;
 
 
         /// <summary>
@@ -76,61 +76,60 @@ namespace ExcelSheetHandler
 
         public void SetStringData(string name, string value)
         {
-            if(_stringData.ContainsKey(name))
-                throw new InvalidOperationException($"Key {name} already exists");
-
-            _stringData.Add(name, value);
+            if(_stringData.TryGetValue(name, out var datas))
+                datas.Add(value);
+            else
+                _stringData.Add(name, new List<string>(){ value });
         }
 
         public void SetIntData(string name, int value)
         {
-            if(_intData.ContainsKey(name))
-                throw new InvalidOperationException($"Key {name} already exists");
-
-            _intData.Add(name, value);
+            if(_intData.TryGetValue(name, out var datas))
+                datas.Add(value);
+            else
+                _intData.Add(name, new List<int>(){ value });
         }
 
         public void SetFloatData(string name, float value)
         {
-            if(_floatData.ContainsKey(name))
-                throw new InvalidOperationException($"Key {name} already exists");
-
-            _floatData.Add(name, value);
+            if(_floatData.TryGetValue(name, out var datas))
+                datas.Add(value);
+            else
+                _floatData.Add(name, new List<float>(){ value });
         }
         
         public void SetBoolData(string name, bool value)
         {
-            if(_boolData.ContainsKey(name))
-                throw new InvalidOperationException($"Key {name} already exists");
-
-            _boolData.Add(name, value);
+            if(_boolData.TryGetValue(name, out var datas))
+                datas.Add(value);
+            else
+                _boolData.Add(name, new List<bool>(){ value });
         }
         
-        public string GetStringData(string name)
+        public List<string> GetStringData(string name)
         {
-            if(_stringData.TryGetValue(name, out string value))
+            if(_stringData.TryGetValue(name, out List<string> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
-        public int GetIntData(string name)
+        public List<int> GetIntData(string name)
         {
-            if(_intData.TryGetValue(name, out int value))
+            if(_intData.TryGetValue(name, out List<int> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
-        public float GetFloatData(string name)
+        public List<float> GetFloatData(string name)
         {
-            if(_floatData.TryGetValue(name, out float value))
+            if(_floatData.TryGetValue(name, out List<float> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
-        
-        public bool GetBoolData(string name)
+        public List<bool> GetBoolData(string name)
         {
-            if(_boolData.TryGetValue(name, out bool value))
+            if(_boolData.TryGetValue(name, out List<bool> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }

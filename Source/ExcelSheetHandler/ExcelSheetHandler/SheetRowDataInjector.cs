@@ -38,7 +38,10 @@ namespace ExcelSheetHandler
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
 
-                field.SetValue(target, data.Value);
+                if(data.Value.Count > 1)
+                    field.SetValue(target, data.Value);
+                else
+                    field.SetValue(target, data.Value.First());
             }
 
             foreach(var data in rowData.IntData)
@@ -46,7 +49,10 @@ namespace ExcelSheetHandler
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
 
-                field.SetValue(target, data.Value);
+                if(data.Value.Count > 1)
+                    field.SetValue(target, data.Value);
+                else
+                    field.SetValue(target, data.Value.First());
             }
 
             foreach(var data in rowData.FloatData)
@@ -54,7 +60,10 @@ namespace ExcelSheetHandler
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
 
-                field.SetValue(target, data.Value);
+                if(data.Value.Count > 1)
+                    field.SetValue(target, data.Value);
+                else
+                    field.SetValue(target, data.Value.First());
             }
 
             foreach(var data in rowData.BoolData)
@@ -62,7 +71,10 @@ namespace ExcelSheetHandler
                 if(fields.TryGetValue(data.Key, out var field) == false)
                     throw new InvalidOperationException($"{target.GetType().Name} type has no {data.Key} set field");
 
-                field.SetValue(target, data.Value);
+                if(data.Value.Count > 1)
+                    field.SetValue(target, data.Value);
+                else
+                    field.SetValue(target, data.Value.First());
             }
         }
 
