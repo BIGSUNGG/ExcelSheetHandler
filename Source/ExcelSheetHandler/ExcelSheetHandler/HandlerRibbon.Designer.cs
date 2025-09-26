@@ -40,7 +40,7 @@
             this.GenerateJsonBtn = this.Factory.CreateRibbonButton();
             this.GenerateBinaryBtn = this.Factory.CreateRibbonButton();
             this.ToJsonBtn = this.Factory.CreateRibbonButton();
-            this.AesKeyEditBox = this.Factory.CreateRibbonEditBox();
+            this.SecretKeyEditBox = this.Factory.CreateRibbonEditBox();
             this.Handler.SuspendLayout();
             this.ReadGroup.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this.ReadGroup.Items.Add(this.GenerateClassCodeBtn);
             this.ReadGroup.Items.Add(this.GenerateJsonBtn);
             this.ReadGroup.Items.Add(this.GenerateBinaryBtn);
-            this.ReadGroup.Items.Add(this.AesKeyEditBox);
+            this.ReadGroup.Items.Add(this.SecretKeyEditBox);
             this.ReadGroup.Items.Add(this.ToJsonBtn);
             this.ReadGroup.Label = "Read";
             this.ReadGroup.Name = "ReadGroup";
@@ -85,11 +85,12 @@
             this.ToJsonBtn.Label = "";
             this.ToJsonBtn.Name = "ToJsonBtn";
             // 
-            // AesKeyEditBox
+            // SecretKeyEditBox
             // 
-            this.AesKeyEditBox.Label = "Aes Key";
-            this.AesKeyEditBox.Name = "AesKeyEditBox";
-            this.AesKeyEditBox.Text = "3rHq2Yv8i9Hc5vZ0xJ7i1Q==";
+            this.SecretKeyEditBox.Label = "Secret Key";
+            this.SecretKeyEditBox.Name = "SecretKeyEditBox";
+            this.SecretKeyEditBox.Text = "3rHq2Yv8i9Hc5vZ0xJ7i1Q==";
+            this.SecretKeyEditBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SecretKeyEditBox_TextChanged);
             // 
             // HandlerRibbon
             // 
@@ -113,7 +114,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateClassCodeBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateJsonBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateBinaryBtn;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox AesKeyEditBox;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox SecretKeyEditBox;
     }
 
     partial class ThisRibbonCollection

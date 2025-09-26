@@ -79,6 +79,19 @@ namespace ExcelSheetHandler
         }
 
         /// <summary>
+        /// T 객체 생성 후 데이터 주입
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="rowData"></param>
+        /// <returns></returns>
+        public T Inject<T>(SheetRowData rowData) where T : new()
+        {
+            T created = new T();
+            Inject(rowData, created);
+            return created;
+        }
+
+        /// <summary>
         /// 데이터 주입이 가능하도록 객체 타입 등록
         /// </summary>
         /// <param name="type">등록할 타입</param>

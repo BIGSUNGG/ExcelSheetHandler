@@ -54,7 +54,7 @@ namespace ExcelSheetHandler
             {
                 Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
                 var rows = SheetHandler.Instance.ParseRows(activeSheet);
-                byte[] bytes = SheetRowDataSerializer.Instance.Serialize(rows, Convert.FromBase64String(AesKeyEditBox.Text));
+                byte[] bytes = SheetRowDataSerializer.Instance.Serialize(rows, Convert.FromBase64String(SecretKeyEditBox.Text));
                 using (var zs = ZString.CreateStringBuilder())
                 {
                     foreach (var b in bytes)
@@ -67,6 +67,11 @@ namespace ExcelSheetHandler
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void SecretKeyEditBox_TextChanged(object sender, RibbonControlEventArgs e)
+        {
+
         }
     }
 }

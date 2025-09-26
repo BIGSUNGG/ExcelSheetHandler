@@ -20,36 +20,28 @@ namespace ExcelSheetHandler
         /// Value : 변수 값
         /// </summary>
         [Index(0)]
-        private Dictionary<string, List<string>> _stringData = new Dictionary<string, List<string>>();
-        [IgnoreFormat]
-        public IEnumerable<KeyValuePair<string, List<string>>> StringData => _stringData;
+        public virtual Dictionary<string, List<string>> StringData { get; set; } = new Dictionary<string, List<string>>();
 
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
         [Index(1)]
-        private Dictionary<string, List<int>> _intData = new Dictionary<string, List<int>>();
-        [IgnoreFormat]
-        public IEnumerable<KeyValuePair<string, List<int>>> IntData => _intData;
+        public virtual Dictionary<string, List<int>> IntData { get; set; } = new Dictionary<string, List<int>>();
 
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
         [Index(2)]
-        private Dictionary<string, List<float>> _floatData = new Dictionary<string, List<float>>();
-        [IgnoreFormat]
-        public IEnumerable<KeyValuePair<string, List<float>>> FloatData => _floatData;
+        public virtual Dictionary<string, List<float>> FloatData { get; set; } = new Dictionary<string, List<float>>();
 
         /// <summary>
         /// Key : 변수 이름
         /// Value : 변수 값
         /// </summary>
         [Index(3)]
-        private Dictionary<string, List<bool>> _boolData = new Dictionary<string, List<bool>>();
-        [IgnoreFormat]
-        public IEnumerable<KeyValuePair<string, List<bool>>> BoolData => _boolData;
+        public virtual Dictionary<string, List<bool>> BoolData { get; set; } = new Dictionary<string, List<bool>>();
 
         /// <summary>
         /// Key : 타입 이름
@@ -75,60 +67,60 @@ namespace ExcelSheetHandler
 
         public void SetStringData(string name, string value)
         {
-            if(_stringData.TryGetValue(name, out var datas))
+            if(StringData.TryGetValue(name, out var datas))
                 datas.Add(value);
             else
-                _stringData.Add(name, new List<string>(){ value });
+                StringData.Add(name, new List<string>(){ value });
         }
 
         public void SetIntData(string name, int value)
         {
-            if(_intData.TryGetValue(name, out var datas))
+            if(IntData.TryGetValue(name, out var datas))
                 datas.Add(value);
             else
-                _intData.Add(name, new List<int>(){ value });
+                IntData.Add(name, new List<int>(){ value });
         }
 
         public void SetFloatData(string name, float value)
         {
-            if(_floatData.TryGetValue(name, out var datas))
+            if(FloatData.TryGetValue(name, out var datas))
                 datas.Add(value);
             else
-                _floatData.Add(name, new List<float>(){ value });
+                FloatData.Add(name, new List<float>(){ value });
         }
         
         public void SetBoolData(string name, bool value)
         {
-            if(_boolData.TryGetValue(name, out var datas))
+            if(BoolData.TryGetValue(name, out var datas))
                 datas.Add(value);
             else
-                _boolData.Add(name, new List<bool>(){ value });
+                BoolData.Add(name, new List<bool>(){ value });
         }
         
         public List<string> GetStringData(string name)
         {
-            if(_stringData.TryGetValue(name, out List<string> value))
+            if(StringData.TryGetValue(name, out List<string> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
         public List<int> GetIntData(string name)
         {
-            if(_intData.TryGetValue(name, out List<int> value))
+            if(IntData.TryGetValue(name, out List<int> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
         public List<float> GetFloatData(string name)
         {
-            if(_floatData.TryGetValue(name, out List<float> value))
+            if(FloatData.TryGetValue(name, out List<float> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
         
         public List<bool> GetBoolData(string name)
         {
-            if(_boolData.TryGetValue(name, out List<bool> value))
+            if(BoolData.TryGetValue(name, out List<bool> value))
                 return value;
             throw new InvalidOperationException($"Key {name} not found");
         }
