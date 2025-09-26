@@ -54,11 +54,11 @@ namespace ExcelSheetHandler
             {
                 Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
                 var rows = SheetHandler.Instance.ParseRows(activeSheet);
-                var bytes = SheetRowDataSerializer.Instance.Serialize(rows);
+                byte[] bytes = SheetRowDataSerializer.Instance.Serialize(rows, Convert.FromBase64String(AesKeyEditBox.Text));
                 using (var zs = ZString.CreateStringBuilder())
                 {
                     foreach (var b in bytes)
-                        zs.Append(b.ToString());
+                        zs.Append(Convert.ToString(b, 8));
 
                     ExcelSheetHandler.TextDisplayDialog.Show("생성된 바이너리 데이터", zs.ToString());
                 }

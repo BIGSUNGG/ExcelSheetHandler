@@ -38,8 +38,9 @@
             this.ReadGroup = this.Factory.CreateRibbonGroup();
             this.GenerateClassCodeBtn = this.Factory.CreateRibbonButton();
             this.GenerateJsonBtn = this.Factory.CreateRibbonButton();
-            this.ToJsonBtn = this.Factory.CreateRibbonButton();
             this.GenerateBinaryBtn = this.Factory.CreateRibbonButton();
+            this.ToJsonBtn = this.Factory.CreateRibbonButton();
+            this.AesKeyEditBox = this.Factory.CreateRibbonEditBox();
             this.Handler.SuspendLayout();
             this.ReadGroup.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +57,7 @@
             this.ReadGroup.Items.Add(this.GenerateClassCodeBtn);
             this.ReadGroup.Items.Add(this.GenerateJsonBtn);
             this.ReadGroup.Items.Add(this.GenerateBinaryBtn);
+            this.ReadGroup.Items.Add(this.AesKeyEditBox);
             this.ReadGroup.Items.Add(this.ToJsonBtn);
             this.ReadGroup.Label = "Read";
             this.ReadGroup.Name = "ReadGroup";
@@ -72,16 +74,22 @@
             this.GenerateJsonBtn.Name = "GenerateJsonBtn";
             this.GenerateJsonBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GenerateJsonBtn_Click);
             // 
-            // ToJsonBtn
-            // 
-            this.ToJsonBtn.Label = "";
-            this.ToJsonBtn.Name = "ToJsonBtn";
-            // 
             // GenerateBinaryBtn
             // 
             this.GenerateBinaryBtn.Label = "Generate Binary ";
             this.GenerateBinaryBtn.Name = "GenerateBinaryBtn";
             this.GenerateBinaryBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GenerateBinaryBtn_Click);
+            // 
+            // ToJsonBtn
+            // 
+            this.ToJsonBtn.Label = "";
+            this.ToJsonBtn.Name = "ToJsonBtn";
+            // 
+            // AesKeyEditBox
+            // 
+            this.AesKeyEditBox.Label = "Aes Key";
+            this.AesKeyEditBox.Name = "AesKeyEditBox";
+            this.AesKeyEditBox.Text = "3rHq2Yv8i9Hc5vZ0xJ7i1Q==";
             // 
             // HandlerRibbon
             // 
@@ -105,6 +113,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateClassCodeBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateJsonBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton GenerateBinaryBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox AesKeyEditBox;
     }
 
     partial class ThisRibbonCollection

@@ -7,6 +7,8 @@ using ZeroFormatter;
 using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ExcelSheetHandler
 {
@@ -14,7 +16,7 @@ namespace ExcelSheetHandler
     {
         public static SheetRowDataSerializer Instance { get; private set; } = new SheetRowDataSerializer();
 
-        public byte[] Serialize(List<SheetRowData> rowDatas)
+        public byte[] Serialize(List<SheetRowData> rowDatas, byte[] aesKey)
         {
             // Step1 : Byte Serialize Encoding
             byte[] encodedBytes = ZeroFormatterSerializer.Serialize(rowDatas);
@@ -31,7 +33,30 @@ namespace ExcelSheetHandler
             }
 
             // Step3 : Encrypt Bytes
-            return compressedBytes;
+            byte[] encryptedBytes;
+            using (var aes = Aes.Create())
+            {
+                aes.KeySize = 128;
+                aes.BlockSize = 128;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Key = aesKey;
+                aes.GenerateIV();
+
+                using (var encryptor = aes.CreateEncryptor())
+                using (var ms = new MemoryStream())
+                {
+                    // prepend IV
+                    ms.Write(aes.IV, 0, aes.IV.Length);
+                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        cs.Write(compressedBytes, 0, compressedBytes.Length);
+                    }
+                    encryptedBytes = ms.ToArray();
+                }
+            }
+    
+            return encryptedBytes;
         }
     }
 }
