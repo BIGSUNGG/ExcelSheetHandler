@@ -249,6 +249,10 @@
     <Compile Include="SheetHeaderCell.cs" />
     <Compile Include="SheetHeaderData.cs" />
     <Compile Include="SheetRowData.cs" />
+    <Compile Include="ByteEncodingSerializer.cs" />
+    <Compile Include="GZipCompressor.cs" />
+    <Compile Include="AesCbcEncryptor.cs" />
+    <Compile Include="HmacIntegrityValidator.cs" />
     <Compile Include="SheetRowDataInjector.cs" />
     <Compile Include="SheetRowDataSerializer.cs" />
     <Compile Include="TextDisplayDialog.cs">
