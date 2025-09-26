@@ -55,8 +55,19 @@ namespace ExcelSheetHandler
                     encryptedBytes = ms.ToArray();
                 }
             }
-    
-            return encryptedBytes;
+
+            // Step4 : Anti Tampering Bytes
+            byte[] hmac;
+            using (var hmacsha256 = new HMACSHA256(aesKey))
+            {
+                hmac = hmacsha256.ComputeHash(encryptedBytes);
+            }
+
+            var finalBytes = new byte[encryptedBytes.Length + hmac.Length];
+            Buffer.BlockCopy(encryptedBytes, 0, finalBytes, 0, encryptedBytes.Length);
+            Buffer.BlockCopy(hmac, 0, finalBytes, encryptedBytes.Length, hmac.Length);
+
+            return finalBytes;
         }
     }
 }
