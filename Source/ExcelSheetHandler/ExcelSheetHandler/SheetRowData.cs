@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ZeroFormatter;
+using System.Data;
 
 namespace ExcelSheetHandler
 {
@@ -13,36 +14,8 @@ namespace ExcelSheetHandler
     /// 시트에서 하나의 행 데이터를 저장하는 클래스
     /// </summary>
     [ZeroFormattable]
-    public class SheetRowData
+    public class SheetRowData : DataHandler.DataSet
     {
-        /// <summary>
-        /// Key : 변수 이름
-        /// Value : 변수 값
-        /// </summary>
-        [Index(0)]
-        public virtual Dictionary<string, List<string>> StringData { get; set; } = new Dictionary<string, List<string>>();
-
-        /// <summary>
-        /// Key : 변수 이름
-        /// Value : 변수 값
-        /// </summary>
-        [Index(1)]
-        public virtual Dictionary<string, List<int>> IntData { get; set; } = new Dictionary<string, List<int>>();
-
-        /// <summary>
-        /// Key : 변수 이름
-        /// Value : 변수 값
-        /// </summary>
-        [Index(2)]
-        public virtual Dictionary<string, List<float>> FloatData { get; set; } = new Dictionary<string, List<float>>();
-
-        /// <summary>
-        /// Key : 변수 이름
-        /// Value : 변수 값
-        /// </summary>
-        [Index(3)]
-        public virtual Dictionary<string, List<bool>> BoolData { get; set; } = new Dictionary<string, List<bool>>();
-
         /// <summary>
         /// Key : 타입 이름
         /// Value : SetData 함수 액션(변수 이름, 변수 값)

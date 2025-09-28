@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace ExcelSheetHandler
+namespace DataHandler.Serialize
 {
     public class HmacIntegrityValidator
     {

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Cysharp.Text;
+using DataHandler;
+using DataHandler.Serialize;
 using Microsoft.Office.Tools.Ribbon;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -54,7 +56,7 @@ namespace ExcelSheetHandler
             {
                 Excel.Worksheet activeSheet = Globals.ThisAddIn.Application.ActiveSheet as Excel.Worksheet;
                 var rows = SheetHandler.Instance.ParseRows(activeSheet);
-                byte[] bytes = SheetRowDataSerializer.Instance.Serialize(rows, Convert.FromBase64String(SecretKeyEditBox.Text));
+                byte[] bytes = DataSetSerializer.Instance.Serialize(rows.Cast<DataSet>().ToList(), Convert.FromBase64String(SecretKeyEditBox.Text));
                 using (var zs = ZString.CreateStringBuilder())
                 {
                     foreach (var b in bytes)

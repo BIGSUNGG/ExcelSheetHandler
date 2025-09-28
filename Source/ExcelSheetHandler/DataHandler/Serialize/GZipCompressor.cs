@@ -1,7 +1,7 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace ExcelSheetHandler
+namespace DataHandler.Serialize
 {
     public class GZipCompressor
     {

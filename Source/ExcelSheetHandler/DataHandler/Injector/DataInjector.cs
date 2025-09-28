@@ -1,19 +1,17 @@
+using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.Tools.Applications.Runtime;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace ExcelSheetHandler
+namespace DataHandler.Inject
 {
     /// <summary>
-    /// SheetRawData의 데이터를 다른 클래스에 주입하는 클래스
+    /// DataSet의 데이터를 다른 클래스에 주입하는 클래스
     /// </summary>
-    public class SheetRowDataInjector
+    public class DataInjector
     {
-        public static SheetRowDataInjector Instance { get; private set; } = new SheetRowDataInjector();
+        public static DataInjector Instance { get; private set; } = new DataInjector();
 
         /// <summary>
         /// First Key : 클래스 타입
@@ -28,7 +26,7 @@ namespace ExcelSheetHandler
         /// <param name="rowData"></param>
         /// <param name="target"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Inject(SheetRowData rowData, object target)
+        public void Inject(DataSet rowData, object target)
         {
             if (_dataFields.TryGetValue(target.GetType(), out var fields) == false)
                 RegisterType(target.GetType(), out fields);
@@ -84,7 +82,7 @@ namespace ExcelSheetHandler
         /// <typeparam name="T"></typeparam>
         /// <param name="rowData"></param>
         /// <returns></returns>
-        public T Inject<T>(SheetRowData rowData) where T : new()
+        public T Inject<T>(DataSet rowData) where T : new()
         {
             T created = new T();
             Inject(rowData, created);

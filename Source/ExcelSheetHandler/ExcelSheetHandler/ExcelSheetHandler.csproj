@@ -128,9 +128,6 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ZeroFormatter, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZeroFormatter.1.6.4\lib\net45\ZeroFormatter.dll</HintPath>
-    </Reference>
     <Reference Include="ZeroFormatter.Interfaces, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ZeroFormatter.Interfaces.1.6.4\lib\net45\ZeroFormatter.Interfaces.dll</HintPath>
     </Reference>
@@ -212,6 +209,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="CodeGenerator.cs" />
     <Compile Include="HandlerRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -244,17 +242,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="CodeGenerator.cs" />
     <Compile Include="SheetHandler.cs" />
     <Compile Include="SheetHeaderCell.cs" />
     <Compile Include="SheetHeaderData.cs" />
     <Compile Include="SheetRowData.cs" />
-    <Compile Include="ByteEncodingSerializer.cs" />
-    <Compile Include="GZipCompressor.cs" />
-    <Compile Include="AesCbcEncryptor.cs" />
-    <Compile Include="HmacIntegrityValidator.cs" />
-    <Compile Include="SheetRowDataInjector.cs" />
-    <Compile Include="SheetRowDataSerializer.cs" />
     <Compile Include="TextDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,7 +260,12 @@
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DataHandler\DataHandler.csproj">
+      <Project>{b8869e5f-0df6-40f6-9260-1da5e648ca5e}</Project>
+      <Name>DataHandler</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

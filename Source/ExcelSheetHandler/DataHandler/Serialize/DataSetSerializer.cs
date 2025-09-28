@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +9,17 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ExcelSheetHandler
+namespace DataHandler.Serialize
 {
-    public class SheetRowDataSerializer
+    public class DataSetSerializer
     {
-        public static SheetRowDataSerializer Instance { get; private set; } = new SheetRowDataSerializer();
+        public static DataSetSerializer Instance { get; private set; } = new DataSetSerializer();
         private readonly ByteEncodingSerializer _byteEncoding = new ByteEncodingSerializer();
         private readonly GZipCompressor _gzip = new GZipCompressor();
         private readonly AesCbcEncryptor _aes = new AesCbcEncryptor();
         private readonly HmacIntegrityValidator _hmac = new HmacIntegrityValidator();
 
-        public byte[] Serialize(List<SheetRowData> rowDatas, byte[] secretKey)
+        public byte[] Serialize(List<DataSet> rowDatas, byte[] secretKey)
         {
             // Step1 : Byte Serialize Encoding
             byte[] encodedBytes = _byteEncoding.Serialize(rowDatas);
@@ -35,7 +34,7 @@ namespace ExcelSheetHandler
             return _hmac.AppendHmac(encryptedBytes, secretKey);
         }
 
-        public List<SheetRowData> Deserialize(byte[] protectedBytes, byte[] secretKey)
+        public List<DataSet> Deserialize(byte[] protectedBytes, byte[] secretKey)
         {
             // Step1 : Split/Verify Anti Tampering Bytes
             var encryptedBytes = _hmac.VerifyAndStripHmac(protectedBytes, secretKey);
